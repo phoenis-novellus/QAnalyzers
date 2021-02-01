@@ -1,0 +1,4 @@
+# set the severity to "warning"
+
+# [*.cs]
+# dotnet_diagnostic.QFX1001.severity = warning
