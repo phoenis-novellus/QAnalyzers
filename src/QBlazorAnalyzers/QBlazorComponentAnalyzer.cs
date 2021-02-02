@@ -41,7 +41,7 @@ namespace QBlazorAnalyzers
             DiagnosticIds.UnknownBlazorOrHtmlTag,
             UnknownBlazorOrHtmlTagTitle,
             UnknownBlazorOrHtmlTagMessageFormat,
-            DiagnosticCategories.General,
+            DiagnosticCategories.Blazor,
             DiagnosticSeverity.Error,
             true);
 
@@ -49,7 +49,7 @@ namespace QBlazorAnalyzers
             DiagnosticIds.UnknownBlazorComponentParameter,
             UnknownBlazorComponentParameterTitle,
             UnknownBlazorComponentParameterMessageFormat,
-            DiagnosticCategories.General,
+            DiagnosticCategories.Blazor,
             DiagnosticSeverity.Error,
             true);
 
