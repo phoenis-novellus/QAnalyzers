@@ -27,7 +27,7 @@ jobs:
       id: version
       uses: battila7/get-version-action@v2.2.1
     - name: Pack
-      run: dotnet pack -c Release -o ./artifacts --no-restore --include-symbols --include-source -p:PackageVersion=${{ steps.version.outputs.version-without-v }}
+      run: dotnet pack -c Release -o ./artifacts --no-restore -p:PackageVersion=${{ steps.version.outputs.version-without-v }}
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
@@ -37,7 +37,7 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
     - name: Publish Nuget to NuGet.org registry
-      run: dotnet nuget push ./**/artifacts/*.nupkg -k ${NUGET_APIKEY} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./**/artifacts/*.nupkg -k ${NUGET_APIKEY} -s https://api.nuget.org/v3/index.json -n true
       env:
         NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
         
