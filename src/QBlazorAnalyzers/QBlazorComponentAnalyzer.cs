@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -110,7 +109,7 @@ namespace QBlazorAnalyzers
                                         x.Name == parameterName
                                         && x.Kind == SymbolKind.Property
                                         && x.GetAttributes()
-                                            .Any(a => a.AttributeClass.Name == "ParameterAttribute")));
+                                            .Any(a => a.AttributeClass?.Name == "ParameterAttribute")));
 
                         var hasCatchAllParameter = componentType
                             .IncludeBaseTypes()
@@ -120,7 +119,7 @@ namespace QBlazorAnalyzers
                                         x.Kind == SymbolKind.Property
                                         && x.GetAttributes()
                                             .Any(a =>
-                                                a.AttributeClass.Name == "ParameterAttribute"
+                                                a.AttributeClass?.Name == "ParameterAttribute"
                                                 && a.NamedArguments
                                                     .Any(na =>
                                                         na.Key == "CaptureUnmatchedValues"))));

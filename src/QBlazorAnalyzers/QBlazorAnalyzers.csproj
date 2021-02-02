@@ -5,7 +5,7 @@
     <IsPackable>true</IsPackable>
     
     <!-- Avoid ID conflicts with the package project. -->
-    <PackageId>*$(MSBuildProjectFullPath)*</PackageId>
+    <PackageId>QFoxFramework.QBlazorAnalyzers</PackageId>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
@@ -13,6 +13,7 @@
     <Description>A collection of Roslyn analyzers for Blazor.</Description>
     <Copyright>PHOENIS GmbH</Copyright>
     <RepositoryUrl>https://github.com/phoenis-novellus/QAnalyzers</RepositoryUrl>
+    <PackageIcon>qfox.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,4 +30,7 @@
     <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="qfox.png" Pack="true" PackagePath=""/>
+  </ItemGroup>
 </Project>

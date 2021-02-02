@@ -23,6 +23,7 @@
             </e>
           </e>
         </e>
+        <e p="qfox.png" t="Include" />
       </e>
       <e p="QBlazorAnalyzers.Demo" t="IncludeRecursive">
         <e p=".editorconfig" t="Include" />

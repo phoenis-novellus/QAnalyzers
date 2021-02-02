@@ -1,6 +1,6 @@
 namespace QBlazorAnalyzers
 {
-    public class DiagnosticCategories
+    public static class DiagnosticCategories
     {
         public const string General = "General";
     }
