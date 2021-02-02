@@ -1,0 +1,35 @@
+name: Release QBlazorAnalyzers
+
+on:
+  release:
+    types:
+      - published
+
+defaults:
+  run:
+    working-directory: src/QBlazorAnalyzers
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Pack
+      run: |
+        arrTag=(${GITHUB_REF//\// })
+        VERSION="${arrTag[2]}"
+        VERSION="${VERSION//v}"
+        dotnet pack -c Release -o ./artifacts --no-restore --include-symbols --include-source -p:PackageVersion=$VERSION
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        path: ./artifacts
