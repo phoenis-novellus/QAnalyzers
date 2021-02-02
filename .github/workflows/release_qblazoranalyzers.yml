@@ -23,22 +23,18 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Process version of the tag
+    - name: Get Version
       id: version
-      uses: ncipollo/semantic-version-action@v1
+      uses: battila7/get-version-action@v2.2.1
     - name: Pack
-      env:
-        VERSION: ${{ steps.version.outputs.tag//v }}
-      run: dotnet pack -c Release -o ./artifacts --no-restore --include-symbols --include-source -p:PackageVersion=$VERSION
+      run: dotnet pack -c Release -o ./artifacts --no-restore --include-symbols --include-source -p:PackageVersion=${{ steps.version.outputs.version-without-v }}
     - name: Update Release
       uses: johnwbyrd/update-release@v1.0.0
-      env:
-        VERSION: ${{ steps.version.outputs.tag//v }}
       with:
         # Your Github token; try \$\{\{ secrets.GITHUB_TOKEN \}\} if your build lasts less than an hour, or create your own secret token with repository access if your build requires longer than an hour.
         token: ${{ secrets.GITHUB_TOKEN }}
         # Paths to built files to be released. May be absolute or relative to \$\{\{ github.workspace \}\}.
-        files: src/QBlazorAnalyzers/artifacts/QFoxFramework.QBlazorAnalyzers.$VERSION.nupkg
+        files: src/QBlazorAnalyzers/artifacts/QFoxFramework.QBlazorAnalyzers.${{ steps.version.outputs.version-without-v }}.nupkg
         # Should the release, if created, be marked as a prerelease?  Such releases are generally publicly visible.
         prerelease: true
         
