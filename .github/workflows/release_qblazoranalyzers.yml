@@ -37,7 +37,7 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
     - name: Publish Nuget to NuGet.org registry
-      run: dotnet nuget push ./**/artifacts/*.nupkg -k ${NUGET_APIKEY} -s -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./**/artifacts/*.nupkg -k ${NUGET_APIKEY} -s https://api.nuget.org/v3/index.json
       env:
         NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
         
