@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -68,7 +69,7 @@ namespace QBlazorAnalyzers
             context.RegisterCompilationStartAction(ctx =>
             {
                 ctx.RegisterSyntaxNodeAction(AnalyzeUnknownBlazorOrHtmlTag, SyntaxKind.InvocationExpression);
-                ctx.RegisterSyntaxNodeAction(AnalyzeUnknownBlazorComponentParameter, SyntaxKind.MethodDeclaration);    
+                ctx.RegisterSyntaxNodeAction(AnalyzeUnknownBlazorComponentParameter, SyntaxKind.MethodDeclaration);
             });
         }
 
@@ -78,28 +79,57 @@ namespace QBlazorAnalyzers
             var invocations = declaration.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>();
 
-            ITypeSymbol? componentType = null;
-
+            List<(ExpressionSyntax builder, ITypeSymbol? componentType)> componentList = new();
+            
             foreach (var invocation in invocations)
             {
-                var methodSymbol =
-                    syntaxNodeAnalysisContext.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                var methodName = methodSymbol?.Name;
+                var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
+                var methodSymbol = syntaxNodeAnalysisContext
+                    .SemanticModel
+                    .GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+
+                if (methodSymbol is null) continue;
+                if (memberAccess is null) continue;
                 
-                if(methodSymbol?.ContainingType.Name != "RenderTreeBuilder") continue;
+                var methodName = methodSymbol.Name;
                 
                 switch (methodName)
                 {
                     case "OpenComponent":
-                        componentType = methodSymbol.TypeArguments[0];
-                        break;
-                    case "CloseComponent":
-                        componentType = null;
-                        break;
-                    case "AddAttribute" when componentType is not null
-                                             && invocation.ArgumentList.Arguments[1].Expression
-                                                 .IsKind(SyntaxKind.StringLiteralExpression):
+                    {
+                      
+                        componentList
+                            .Where(x => x.builder.IsEquivalentTo(memberAccess.Expression))
+                            .ToList()
+                            .ForEach(x => componentList.Remove(x));
+                        
+                        componentList.Add((memberAccess.Expression,  methodSymbol.TypeArguments[0]));
 
+                        break;
+                    }
+                    case "CloseComponent":
+                    {
+                        componentList
+                            .Where(x => x.builder.IsEquivalentTo(memberAccess.Expression))
+                            .ToList()
+                            .ForEach(x => componentList.Remove(x));
+                 
+                        break;
+                    }
+                    case "AddAttribute":
+                    {
+                        
+                        var (_, componentType) = componentList
+                            .FirstOrDefault(x => x.builder.IsEquivalentTo(memberAccess.Expression));
+
+                        var argumentIsStringLiteral = invocation
+                            .ArgumentList
+                            .Arguments[1]
+                            .Expression
+                            .IsKind(SyntaxKind.StringLiteralExpression);
+                        
+                        if(componentType is null || !argumentIsStringLiteral) break;
+                            
                         var parameterName = invocation.ArgumentList.Arguments[1].Expression.GetFirstToken().ValueText;
                         var hasParameter = componentType
                             .IncludeBaseTypes()
@@ -134,6 +164,7 @@ namespace QBlazorAnalyzers
                         }
 
                         break;
+                    }
                 }
             }
         }
@@ -157,13 +188,15 @@ namespace QBlazorAnalyzers
 
             var document = new HtmlParser().ParseDocument(markupString);
             document.DescendentsAndSelf<IHtmlUnknownElement>()
-                .Select(x => 
-                    Diagnostic.Create(UnknownBlazorOrHtmlTag, invocation.GetLocation(), GetOriginalTagName(x.LocalName, markupString)))
+                .Select(x =>
+                    Diagnostic.Create(UnknownBlazorOrHtmlTag, invocation.GetLocation(),
+                        GetOriginalTagName(x.LocalName, markupString)))
                 .ToList()
                 .ForEach(syntaxNodeAnalysisContext.ReportDiagnostic);
         }
 
         private static string GetOriginalTagName(string tagName, string markupString)
             => Regex.Match(markupString, tagName, RegexOptions.IgnoreCase).Value;
+        
     }
 }
