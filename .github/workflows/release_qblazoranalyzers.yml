@@ -28,12 +28,12 @@ jobs:
       uses: ncipollo/semantic-version-action@v1
     - name: Pack
       env:
-        VERSION: ${{ steps.version.outputs.tag }}
+        VERSION: ${{ steps.version.outputs.tag//v }}
       run: dotnet pack -c Release -o ./artifacts --no-restore --include-symbols --include-source -p:PackageVersion=$VERSION
     - name: Update Release
       uses: johnwbyrd/update-release@v1.0.0
       env:
-        VERSION: ${{ steps.version.outputs.tag }}
+        VERSION: ${{ steps.version.outputs.tag//v }}
       with:
         # Your Github token; try \$\{\{ secrets.GITHUB_TOKEN \}\} if your build lasts less than an hour, or create your own secret token with repository access if your build requires longer than an hour.
         token: ${{ secrets.GITHUB_TOKEN }}
