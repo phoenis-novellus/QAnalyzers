@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9886d0e9-018d-43cb-8eb5-c3da1a762b0d" name="Default Changelist" comment="fix nuget package">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QAnalyzers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QAnalyzers/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers.Demo/App.razor" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers.Demo/App.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers.Demo/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers.Demo/Pages/Index.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers.Demo/Shared/SurveyPrompt.razor" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers.Demo/Shared/SurveyPrompt.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorAnalyzers.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorAnalyzers.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="9702" />
+    <option name="totalTimeSeconds" value="9923" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -36,30 +33,24 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/735E84C3-457A-4CEB-8F18-E9435090DA17/d0/31676130/IEqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QBlazorAnalyzers/DiagnosticIds.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers/DiagnosticIds.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers.Demo/Pages/Index.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers.Demo/Shared/SurveyPrompt.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers/DiagnosticIds.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QBlazorAnalyzers.Demo/obj/Debug/net5.0/Razor/App.razor.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D9481C48-DEDE-406B-80E9-12FDF0C86235/1C0/Syntax.xml.Syntax.Generated.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QBlazorAnalyzers.Demo/obj/Debug/net5.0/Razor/Pages/Index.razor.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D9481C48-DEDE-406B-80E9-12FDF0C86235/1B2/CSharpSyntaxNode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers/DiagnosticCategories.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2CDB5A9D-896E-4B73-8149-97583E450999/167/SyntaxNode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers.Demo/App.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/QBlazorAnalyzers/DiagnosticCategories.cs" />
       <option value="$PROJECT_DIR$/QBlazorAnalyzers/DiagnosticIds.cs" />
-      <option value="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorAnalyzers.csproj" />
       <option value="$PROJECT_DIR$/QBlazorAnalyzers.Demo/App.razor" />
       <option value="$PROJECT_DIR$/QBlazorAnalyzers.Demo/Pages/Counter.razor" />
       <option value="$PROJECT_DIR$/QBlazorAnalyzers.Demo/Shared/SurveyPrompt.razor" />
       <option value="$PROJECT_DIR$/QBlazorAnalyzers.Demo/Pages/Index.razor" />
       <option value="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" />
+      <option value="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorAnalyzers.csproj" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1nsfholhAh6JIfw5ViFXHQJHGtN" />
