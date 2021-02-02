@@ -13,7 +13,7 @@ using AngleSharp.Html.Parser;
 namespace QBlazorAnalyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class QBlazorAnalyzersAnalyzer : DiagnosticAnalyzer
+    public class QBlazorComponentAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString UnknownBlazorOrHtmlTagTitle = new LocalizableResourceString(
             nameof(Resources.UnknownBlazorOrHtmlTagTitle),
