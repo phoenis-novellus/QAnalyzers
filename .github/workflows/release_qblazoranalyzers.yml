@@ -27,7 +27,7 @@ jobs:
       id: version
       uses: battila7/get-version-action@v2.2.1
     - name: Pack
-      run: dotnet pack -c Release -o ./artifacts --no-restore --include-source -p:PackageVersion=${{ steps.version.outputs.version-without-v }}
+      run: dotnet pack -c Release -o ./artifacts --no-restore -p:PackageVersion=${{ steps.version.outputs.version-without-v }}
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
