@@ -1,4 +1,4 @@
-name: Pack QAnalyzers
+name: Pack QBlazorAnalyzers
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 defaults:
   run:
-    working-directory: src/QAnalyzers
+    working-directory: src/QBlazorAnalyzers
 jobs:
   build:
 
