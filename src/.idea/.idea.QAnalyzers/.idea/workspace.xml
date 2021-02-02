@@ -4,14 +4,10 @@
     <projectFile>QBlazorAnalyzers.Demo/QBlazorAnalyzers.Demo.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9886d0e9-018d-43cb-8eb5-c3da1a762b0d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QBlazorAnalyzers/qfox.png" afterDir="false" />
+    <list default="true" id="9886d0e9-018d-43cb-8eb5-c3da1a762b0d" name="Default Changelist" comment="fix warnings and add nuget icon">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QAnalyzers/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QAnalyzers/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QAnalyzers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QAnalyzers/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers/DiagnosticCategories.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers/DiagnosticCategories.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers/DiagnosticIds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers/DiagnosticIds.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorAnalyzers.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorAnalyzers.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="1296" />
+    <option name="totalTimeSeconds" value="2263" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -28,7 +24,9 @@
     <option name="projectConfigVersion" value="2" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/QBlazorAnalyzers/DiagnosticIds.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers/DiagnosticIds.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/QBlazorAnalyzers/QBlazorComponentAnalyzer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers/DiagnosticCategories.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/dhaas/Source/QAnalyzers/src/QBlazorAnalyzers/DiagnosticIds.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -54,6 +52,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.QBlazorAnalyzers.Demo: IIS Express">
     <configuration name="QBlazorAnalyzers.Demo: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -104,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612184017840</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix warnings and add nuget icon">
+      <created>1612270095900</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612270095900</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +133,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="adds files to .idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="adds files to .idea" />
+    <MESSAGE value="fix warnings and add nuget icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix warnings and add nuget icon" />
   </component>
 </project>

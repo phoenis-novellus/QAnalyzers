@@ -15,7 +15,13 @@
         <e p="QBlazorComponentAnalyzer.cs" t="Include" />
         <e p="Resources.Designer.cs" t="Include" />
         <e p="Resources.resx" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
+        <e p="bin" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="QBlazorAnalyzers.dll" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -24,6 +30,10 @@
           </e>
         </e>
         <e p="qfox.png" t="Include" />
+        <e p="tools" t="Include">
+          <e p="install.ps1" t="Include" />
+          <e p="uninstall.ps1" t="Include" />
+        </e>
       </e>
       <e p="QBlazorAnalyzers.Demo" t="IncludeRecursive">
         <e p=".editorconfig" t="Include" />
