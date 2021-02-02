@@ -36,9 +36,8 @@ jobs:
         file_glob: true
         tag: ${{ github.ref }}
         overwrite: true
-    - name: Publish Nuget to GitHub registry
-      run: dotnet nuget push ./**/artifacts/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/phoenis-novellus/index.json
+    - name: Publish Nuget to NuGet.org registry
+      run: dotnet nuget push ./**/artifacts/*.nupkg -k ${NUGET_APIKEY} -s -s https://api.nuget.org/v3/index.json
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+        NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
         
