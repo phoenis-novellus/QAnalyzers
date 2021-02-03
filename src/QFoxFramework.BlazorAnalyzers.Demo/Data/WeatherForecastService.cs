@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QBlazorAnalyzers.Test.Data
+namespace QFoxFramework.BlazorAnalyzers.Demo.Data
 {
     public class WeatherForecastService
     {

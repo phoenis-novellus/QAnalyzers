@@ -1,6 +1,6 @@
 using System;
 
-namespace QBlazorAnalyzers.Test.Data
+namespace QFoxFramework.BlazorAnalyzers.Demo.Data
 {
     public class WeatherForecast
     {

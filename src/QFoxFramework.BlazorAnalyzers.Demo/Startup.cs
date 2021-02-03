@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using QBlazorAnalyzers.Test.Data;
+using QFoxFramework.BlazorAnalyzers.Demo.Data;
 
-namespace QBlazorAnalyzers.Test
+namespace QFoxFramework.BlazorAnalyzers.Demo
 {
     public class Startup
     {

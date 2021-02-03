@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace QBlazorAnalyzers.Test
+namespace QFoxFramework.BlazorAnalyzers.Demo
 {
     public class Program
     {

@@ -1,4 +1,4 @@
-name: Release QBlazorAnalyzers
+name: Release QFoxFramework.BlazorAnalyzers
 
 on:
   release:
@@ -7,7 +7,7 @@ on:
 
 defaults:
   run:
-    working-directory: src/QBlazorAnalyzers
+    working-directory: src/QFoxFramework.BlazorAnalyzers
 jobs:
   build:
 

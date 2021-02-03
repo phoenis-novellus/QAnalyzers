@@ -5,15 +5,17 @@
     <IsPackable>true</IsPackable>
     
     <!-- Avoid ID conflicts with the package project. -->
-    <PackageId>QFoxFramework.QBlazorAnalyzers</PackageId>
+    <PackageId>QFoxFramework.BlazorAnalyzers</PackageId>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
-    <Title>QBlazorAnalyzers</Title>
+    <Title>QFoxFramework.BlazorAnalyzers</Title>
     <Description>A collection of Roslyn analyzers for Blazor.</Description>
     <Copyright>PHOENIS GmbH</Copyright>
     <RepositoryUrl>https://github.com/phoenis-novellus/QAnalyzers</RepositoryUrl>
     <PackageIcon>qfox.png</PackageIcon>
+    <AssemblyName>QFoxFramework.BlazorAnalyzers</AssemblyName>
+    <RootNamespace>QFoxFramework.BlazorAnalyzers</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
