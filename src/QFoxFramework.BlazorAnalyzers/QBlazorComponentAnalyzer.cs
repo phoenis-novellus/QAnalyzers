@@ -1,8 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -70,11 +66,9 @@ namespace QFoxFramework.BlazorAnalyzers
             context.EnableConcurrentExecution();
 
             // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Analyzer%20Actions%20Semantics.md for more information
-            context.RegisterCompilationStartAction(ctx =>
-            {
-                ctx.RegisterSyntaxNodeAction(AnalyzeUnknownBlazorOrHtmlTag, SyntaxKind.InvocationExpression);
-                ctx.RegisterSyntaxNodeAction(AnalyzeUnknownBlazorComponentParameter, SyntaxKind.MethodDeclaration);
-            });
+            
+            context.RegisterSyntaxNodeAction(AnalyzeUnknownBlazorOrHtmlTag, SyntaxKind.InvocationExpression);
+            context.RegisterSyntaxNodeAction(AnalyzeUnknownBlazorComponentParameter, SyntaxKind.MethodDeclaration);
         }
 
         private static void AnalyzeUnknownBlazorComponentParameter(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext)
@@ -83,94 +77,118 @@ namespace QFoxFramework.BlazorAnalyzers
             var invocations = declaration.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>();
 
-            List<(ExpressionSyntax builder, ITypeSymbol? componentType)> componentList = new();
-            
+            Stack<ITypeSymbol?> componentStack = new();
+
             foreach (var invocation in invocations)
             {
-                var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
                 var methodSymbol = syntaxNodeAnalysisContext
                     .SemanticModel
                     .GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
                 if (methodSymbol is null) continue;
-                if (memberAccess is null) continue;
-                
+
                 var methodName = methodSymbol.Name;
-                
+
                 switch (methodName)
                 {
+                    case "OpenElement":
+                        componentStack.Push(null);
+                        break;
                     case "OpenComponent":
-                    {
-                      
-                        componentList
-                            .Where(x => x.builder.IsEquivalentTo(memberAccess.Expression))
-                            .ToList()
-                            .ForEach(x => componentList.Remove(x));
+                        var typeSymbol = GetComponentTypeSymbol(syntaxNodeAnalysisContext, methodSymbol, invocation);
                         
-                        componentList.Add((memberAccess.Expression,  methodSymbol.TypeArguments[0]));
-
-                        break;
-                    }
-                    case "CloseComponent":
-                    {
-                        componentList
-                            .Where(x => x.builder.IsEquivalentTo(memberAccess.Expression))
-                            .ToList()
-                            .ForEach(x => componentList.Remove(x));
-                 
-                        break;
-                    }
-                    case "AddAttribute":
-                    {
-                        
-                        var (_, componentType) = componentList
-                            .FirstOrDefault(x => x.builder.IsEquivalentTo(memberAccess.Expression));
-
-                        var argumentIsStringLiteral = invocation
-                            .ArgumentList
-                            .Arguments[1]
-                            .Expression
-                            .IsKind(SyntaxKind.StringLiteralExpression);
-                        
-                        if(componentType is null || !argumentIsStringLiteral) break;
-                            
-                        var parameterName = invocation.ArgumentList.Arguments[1].Expression.GetFirstToken().ValueText;
-                        var hasParameter = componentType
-                            .IncludeBaseTypes()
-                            .Any(t =>
-                                t.GetMembers()
-                                    .Any(x =>
-                                        x.Name == parameterName
-                                        && x.Kind == SymbolKind.Property
-                                        && x.GetAttributes()
-                                            .Any(a => a.AttributeClass?.Name == "ParameterAttribute")));
-
-                        var hasCatchAllParameter = componentType
-                            .IncludeBaseTypes()
-                            .Any(t =>
-                                t.GetMembers()
-                                    .Any(x =>
-                                        x.Kind == SymbolKind.Property
-                                        && x.GetAttributes()
-                                            .Any(a =>
-                                                a.AttributeClass?.Name == "ParameterAttribute"
-                                                && a.NamedArguments
-                                                    .Any(na =>
-                                                        na.Key == "CaptureUnmatchedValues"))));
-
-                        //Parameter(CaptureUnmatchedValues = true)
-                        if (!hasParameter && !hasCatchAllParameter)
+                        if (typeSymbol is not null)
                         {
-                            var diagnostic = Diagnostic.Create(UnknownBlazorComponentParameter,
-                                invocation.GetLocation(), parameterName, componentType.MetadataName);
-
-                            syntaxNodeAnalysisContext.ReportDiagnostic(diagnostic);
+                            componentStack.Push(typeSymbol);
                         }
 
                         break;
-                    }
+                    case "CloseElement":
+                        if (componentStack.Peek() is null)
+                        {
+                            componentStack.Pop();
+                        }
+                        break;
+                    case "CloseComponent":
+                        if (componentStack.Peek() is not null)
+                        {
+                            componentStack.Pop();
+                        }
+                        break;
+                    case "AddAttribute":
+                        var currentComponentType = componentStack.Peek();
+                        ValidateAddAttribute(syntaxNodeAnalysisContext, currentComponentType, invocation);
+
+                        break;
                 }
             }
+        }
+
+        private static ITypeSymbol? GetComponentTypeSymbol(
+            SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
+            IMethodSymbol methodSymbol, 
+            InvocationExpressionSyntax invocation)
+        {
+            ITypeSymbol? typeSymbol = null;
+
+            if (methodSymbol.IsGenericMethod)
+            {
+                typeSymbol = methodSymbol.TypeArguments[0];
+            }
+            else if (invocation.ArgumentList.Arguments[1].Expression is TypeOfExpressionSyntax
+                typeOfExpression)
+            {
+                typeSymbol = (ITypeSymbol?) syntaxNodeAnalysisContext
+                    .SemanticModel
+                    .GetSymbolInfo(typeOfExpression.Type)
+                    .Symbol;
+            }
+
+            return typeSymbol;
+        }
+
+        private static void ValidateAddAttribute(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
+            ITypeSymbol? currentComponentType,
+            InvocationExpressionSyntax invocation)
+        {
+            var argumentIsStringLiteral = invocation
+                .ArgumentList
+                .Arguments[1]
+                .Expression
+                .IsKind(SyntaxKind.StringLiteralExpression);
+
+            if (currentComponentType is null || !argumentIsStringLiteral) return;
+
+            var parameterName = invocation.ArgumentList.Arguments[1].Expression.GetFirstToken().ValueText;
+            var hasParameter = currentComponentType
+                .IncludeBaseTypes()
+                .Any(t =>
+                    t.GetMembers(parameterName)
+                        .Any(x =>
+                            x.Kind == SymbolKind.Property
+                            && x.GetAttributes()
+                                .Any(a => a.AttributeClass?.Name == "ParameterAttribute")));
+
+            var hasCatchAllParameter = currentComponentType
+                .IncludeBaseTypes()
+                .Any(t =>
+                    t.GetMembers()
+                        .Any(x =>
+                            x.Kind == SymbolKind.Property
+                            && x.GetAttributes()
+                                .Any(a =>
+                                    a.AttributeClass?.Name == "ParameterAttribute"
+                                    && a.NamedArguments
+                                        .Any(na =>
+                                            na.Key == "CaptureUnmatchedValues"))));
+
+            //Parameter(CaptureUnmatchedValues = true)
+            if (hasParameter || hasCatchAllParameter) return;
+
+            var diagnostic = Diagnostic.Create(UnknownBlazorComponentParameter,
+                invocation.GetLocation(), parameterName, currentComponentType.MetadataName);
+
+            syntaxNodeAnalysisContext.ReportDiagnostic(diagnostic);
         }
 
         private static void AnalyzeUnknownBlazorOrHtmlTag(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext)
@@ -201,6 +219,5 @@ namespace QFoxFramework.BlazorAnalyzers
 
         private static string GetOriginalTagName(string tagName, string markupString)
             => Regex.Match(markupString, tagName, RegexOptions.IgnoreCase).Value;
-        
     }
 }
