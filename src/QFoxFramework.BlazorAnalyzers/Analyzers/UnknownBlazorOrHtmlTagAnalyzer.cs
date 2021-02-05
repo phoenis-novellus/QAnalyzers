@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace QFoxFramework.BlazorAnalyzers.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class QBlazorComponentAnalyzer : DiagnosticAnalyzer
+    public class UnknownBlazorOrHtmlTagAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString UnknownBlazorOrHtmlTagTitle = new LocalizableResourceString(
             nameof(Resources.UnknownBlazorOrHtmlTagTitle),
