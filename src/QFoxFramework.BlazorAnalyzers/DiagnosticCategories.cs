@@ -1,4 +1,4 @@
-namespace QBlazorAnalyzers
+namespace QFoxFramework.BlazorAnalyzers
 {
     public static class DiagnosticCategories
     {

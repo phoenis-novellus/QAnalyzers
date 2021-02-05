@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace QBlazorAnalyzers
+namespace QFoxFramework.BlazorAnalyzers
 {
     public static class Extensions
     {

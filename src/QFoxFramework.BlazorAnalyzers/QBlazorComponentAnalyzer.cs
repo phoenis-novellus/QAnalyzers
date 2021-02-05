@@ -9,8 +9,12 @@ using System.Text.RegularExpressions;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace QBlazorAnalyzers
+namespace QFoxFramework.BlazorAnalyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class QBlazorComponentAnalyzer : DiagnosticAnalyzer

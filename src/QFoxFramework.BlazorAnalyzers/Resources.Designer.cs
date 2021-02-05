@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QBlazorAnalyzers {
+namespace QFoxFramework.BlazorAnalyzers {
     using System;
     
     
