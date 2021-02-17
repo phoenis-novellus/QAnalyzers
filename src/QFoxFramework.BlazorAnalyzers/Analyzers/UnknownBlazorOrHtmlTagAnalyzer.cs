@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace QFoxFramework.BlazorAnalyzers.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    // ReSharper disable once UnusedType.Global
     public class UnknownBlazorOrHtmlTagAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString UnknownBlazorOrHtmlTagTitle = new LocalizableResourceString(
@@ -61,7 +62,7 @@ namespace QFoxFramework.BlazorAnalyzers.Analyzers
                 markupString = $"<{markupString}></{markupString}>";
             }
 
-            var document = new HtmlParser().ParseDocument(markupString);
+            using var document = new HtmlParser().ParseDocument(markupString);
             document.DescendentsAndSelf<IHtmlUnknownElement>()
                 .Select(x =>
                     Diagnostic.Create(UnknownBlazorOrHtmlTag, invocation.GetLocation(),

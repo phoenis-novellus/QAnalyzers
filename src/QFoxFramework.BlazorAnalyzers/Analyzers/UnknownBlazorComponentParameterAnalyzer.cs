@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace QFoxFramework.BlazorAnalyzers.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    // ReSharper disable once UnusedType.Global
     public class UnknownBlazorComponentParameterAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString UnknownBlazorComponentParameterTitle = new LocalizableResourceString(
@@ -154,8 +155,7 @@ namespace QFoxFramework.BlazorAnalyzers.Analyzers
                                     && a.NamedArguments
                                         .Any(na =>
                                             na.Key == "CaptureUnmatchedValues"))));
-
-            //Parameter(CaptureUnmatchedValues = true)
+            
             if (hasParameter || hasCatchAllParameter) return;
 
             var diagnostic = Diagnostic.Create(UnknownBlazorComponentParameter,
