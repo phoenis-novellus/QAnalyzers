@@ -63,13 +63,30 @@ namespace QFoxFramework.BlazorAnalyzers.Analyzers
 
                 switch (methodName)
                 {
+                    case "OpenElement":
+                        componentStack.Push(null);
+                        break;
                     case "OpenComponent":
                         var typeSymbol = GetComponentTypeSymbol(syntaxNodeAnalysisContext, methodSymbol, invocation);
-                        componentStack.Push(typeSymbol);
+
+                        if (typeSymbol is not null)
+                        {
+                            componentStack.Push(typeSymbol);
+                        }
+
+                        break;
+                    case "CloseElement":
+                        if (componentStack.Peek() is null)
+                        {
+                            componentStack.Pop();
+                        }
 
                         break;
                     case "CloseComponent":
-                        componentStack.Pop();
+                        if (componentStack.Peek() is not null)
+                        {
+                            componentStack.Pop();
+                        }
 
                         break;
                     case "AddAttribute":
