@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Analyzer Include="..\QFoxFramework.BlazorAnalyzers\bin\Debug\net8.0\AngleSharp.dll" />
-        <Analyzer Include="..\QFoxFramework.BlazorAnalyzers\bin\Debug\net8.0\QFoxFramework.BlazorAnalyzers.dll" />
+        <Analyzer Include="..\QFoxFramework.BlazorAnalyzers\bin\Debug\netstandard2.1\AngleSharp.dll" />
+        <Analyzer Include="..\QFoxFramework.BlazorAnalyzers\bin\Debug\netstandard2.1\QFoxFramework.BlazorAnalyzers.dll" />
     </ItemGroup>
 </Project>

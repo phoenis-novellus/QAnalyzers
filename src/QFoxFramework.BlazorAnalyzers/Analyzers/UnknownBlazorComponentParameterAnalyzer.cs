@@ -63,33 +63,17 @@ namespace QFoxFramework.BlazorAnalyzers.Analyzers
 
                 switch (methodName)
                 {
-                    case "OpenElement":
-                        componentStack.Push(null);
-                        break;
                     case "OpenComponent":
                         var typeSymbol = GetComponentTypeSymbol(syntaxNodeAnalysisContext, methodSymbol, invocation);
-
-                        if (typeSymbol is not null)
-                        {
-                            componentStack.Push(typeSymbol);
-                        }
-
-                        break;
-                    case "CloseElement":
-                        if (componentStack.Peek() is null)
-                        {
-                            componentStack.Pop();
-                        }
+                        componentStack.Push(typeSymbol);
 
                         break;
                     case "CloseComponent":
-                        if (componentStack.Peek() is not null)
-                        {
-                            componentStack.Pop();
-                        }
+                        componentStack.Pop();
 
                         break;
                     case "AddAttribute":
+                    case "AddComponentParameter":
                         var currentComponentType = componentStack.Peek();
                         ValidateAddAttribute(syntaxNodeAnalysisContext, currentComponentType, invocation);
 
@@ -121,7 +105,8 @@ namespace QFoxFramework.BlazorAnalyzers.Analyzers
             return typeSymbol;
         }
 
-        private static void ValidateAddAttribute(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
+        private static void ValidateAddAttribute(
+            SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
             ITypeSymbol? currentComponentType,
             InvocationExpressionSyntax invocation)
         {

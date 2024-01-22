@@ -15,19 +15,19 @@
     foo
 </div>
 
-<p>
-    bar
-    <Demo1/>
-</p>
+@* <p> *@
+@*     bar *@
+@*     <Demo1/> *@
+@* </p> *@
+@* *@
+@* <Demo2> *@
+@*     @Empty *@
+@* </Demo2> *@
 
-<Demo2>
-    @Empty
-</Demo2>
-
-@Test2
+@* @Test2 *@
 
 @code {
 
     private const string Empty = "";
-    RenderFragment Test2 => @<Demo3></Demo3>;
+    @* RenderFragment Test2 => @<Demo3></Demo3>; *@
 }

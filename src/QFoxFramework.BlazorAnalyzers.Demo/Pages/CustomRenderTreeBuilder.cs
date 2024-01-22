@@ -12,8 +12,11 @@ namespace QFoxFramework.BlazorAnalyzers.Demo.Pages
             builder.CloseComponent();
             
             builder.OpenComponent<Counter>(2);
-            
             builder.AddAttribute(3, "Test2");
+            builder.CloseComponent();
+            
+            builder.OpenComponent<Index>(4);
+            builder.AddComponentParameter(5, "Foo", "Bar");
             builder.CloseComponent();
         }
     }
