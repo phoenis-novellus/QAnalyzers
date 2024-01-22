@@ -7,15 +7,13 @@ namespace QFoxFramework.BlazorAnalyzers.Demo.Pages
     {
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            var i = 0;
-            
-            builder.OpenComponent(i++, typeof(Counter));
-            builder.AddAttribute(i++, "Test");
+            builder.OpenComponent(0, typeof(Counter));
+            builder.AddAttribute(1, "Test");
             builder.CloseComponent();
             
-            builder.OpenComponent<Counter>(i++);
+            builder.OpenComponent<Counter>(2);
             
-            builder.AddAttribute(i, "Test2");
+            builder.AddAttribute(3, "Test2");
             builder.CloseComponent();
         }
     }

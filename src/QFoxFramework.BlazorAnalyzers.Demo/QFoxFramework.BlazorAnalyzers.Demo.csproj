@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>12</LangVersion>
+        <Nullable>enable</Nullable>
+        <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-        <Analyzer Include="..\QFoxFramework.BlazorAnalyzers\bin\Debug\netstandard2.0\AngleSharp.dll" />
-        <Analyzer Include="..\QFoxFramework.BlazorAnalyzers\bin\Debug\netstandard2.0\QFoxFramework.BlazorAnalyzers.dll" />
+        <Analyzer Include="..\QFoxFramework.BlazorAnalyzers\bin\Debug\net8.0\AngleSharp.dll" />
+        <Analyzer Include="..\QFoxFramework.BlazorAnalyzers\bin\Debug\net8.0\QFoxFramework.BlazorAnalyzers.dll" />
     </ItemGroup>
 </Project>

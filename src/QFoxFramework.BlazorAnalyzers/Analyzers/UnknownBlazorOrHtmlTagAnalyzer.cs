@@ -63,7 +63,7 @@ namespace QFoxFramework.BlazorAnalyzers.Analyzers
             }
 
             using var document = new HtmlParser().ParseDocument(markupString);
-            document.DescendentsAndSelf<IHtmlUnknownElement>()
+            document.DescendantsAndSelf<IHtmlUnknownElement>()
                 .Select(x =>
                     Diagnostic.Create(UnknownBlazorOrHtmlTag, invocation.GetLocation(),
                         GetOriginalTagName(x.LocalName, markupString)))
